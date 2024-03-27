@@ -3,7 +3,7 @@ package com.project.model;
 import org.springframework.http.HttpStatus;
 
 public class HttpResponse {
-    private int httpStatusCode;
+    private int httpStatusCode;//200,201,400,500
     private HttpStatus httpStatus;
     private String reason;
     private String message;

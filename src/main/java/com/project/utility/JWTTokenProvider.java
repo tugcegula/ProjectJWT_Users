@@ -30,9 +30,14 @@ import java.util.stream.Collectors;
 @Component
 public class JWTTokenProvider {
 
+    //properties'de tanımladık @Value ile de jwt.secret bilgisinin nerede olduğunu gösterdik
     @Value("${jwt.secret}")
+    //Valuedaki bilgi buraya aktarılır
     private String secret;
 
+
+    //Token doğru bir kullanıcıya aitse erişim bilgileri claimse aktarılır. Returm ile bu bilgiler aktarılır
+    //new date ile tokenın süresi geçmiş mi konrol ediyoruz
     public String generateJWTToken(UserPrincipal userPrincipal){
         String[] claims = getClaimsFromUser(userPrincipal);
         return JWT.create().withIssuer(GET_ARRAYS_LLC).withAudience(GET_ARRAYS_ADMINISTRATION)
@@ -41,13 +46,13 @@ public class JWTTokenProvider {
                 .sign(HMAC512(secret.getBytes()));
 
     }
-
-
+    //it's going to get the authorities from token
     public List<GrantedAuthority> getAuthorities(String token){
         String[] claims = getClaimsFromToken(token);
         return stream(claims).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
+    // once we verify the token we'll be able to tell to spring security 'this user is authenticated, process the request'
     public Authentication getAuthentication(String username, List<GrantedAuthority> authorities, HttpServletRequest request){
         UsernamePasswordAuthenticationToken userPasswordoutToken = new
                 UsernamePasswordAuthenticationToken(username,null,authorities);
@@ -55,6 +60,8 @@ public class JWTTokenProvider {
         return userPasswordoutToken;
     }
 
+    //checking whether token is valid or not
+    //apache.comm burada eklendi
     public boolean isTokenValid(String username, String token) {
         JWTVerifier verifier = getJWTVerifier();
         return StringUtils.isNotEmpty(username) && isTokenExpired(verifier,token);
