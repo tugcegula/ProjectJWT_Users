@@ -2,6 +2,7 @@ package com.project.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity//JPA entity
 //convert this variables into a table in a database
@@ -14,6 +15,13 @@ public class User implements Serializable {//because we transfer this datas to d
     private String surname;
     private String username;
     private String email;
+
+
+
+    private String profileImageUrl;
+    private Date lastLoginDate;
+    private Date lastLoginDateDisplay;
+    private Date joinDate;
     private String password;
     private String[] roles; //User,Admin
     private String[] authorities;
@@ -32,12 +40,16 @@ public class User implements Serializable {//because we transfer this datas to d
 
 
 
-    public User(long id, String name, String surname, String username, String email, String password, String[] roles, String[] authorities, boolean isActive, boolean isNotLocked) {
+    public User(long id, String name, String surname, String username, String email, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String password, String[] roles, String[] authorities, boolean isActive, boolean isNotLocked) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.email = email;
+        this.profileImageUrl = profileImageUrl;
+        this.lastLoginDate = lastLoginDate;
+        this.lastLoginDateDisplay = lastLoginDateDisplay;
+        this.joinDate = joinDate;
         this.password = password;
         this.roles = roles;
         this.authorities = authorities;
@@ -87,6 +99,37 @@ public class User implements Serializable {//because we transfer this datas to d
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public Date getLastLoginDateDisplay() {
+        return lastLoginDateDisplay;
+    }
+
+    public void setLastLoginDateDisplay(Date lastLoginDateDisplay) {
+        this.lastLoginDateDisplay = lastLoginDateDisplay;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 
     public String getPassword() {
