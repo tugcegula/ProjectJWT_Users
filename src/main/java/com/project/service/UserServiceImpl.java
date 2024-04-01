@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+//we implement UserDetailsService so we can override its method
+//this method called whenever spring security is trying to check authantication of a user
+//if SS can't find user on the DB its gonna throw exception
 @Service
 @Transactional
 @Qualifier("userDetailsService")
