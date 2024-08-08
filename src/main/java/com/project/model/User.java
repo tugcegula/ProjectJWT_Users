@@ -10,20 +10,18 @@ public class User implements Serializable {//because we transfer this datas to d
     @Id// for marking the private user id as the primary key
     @GeneratedValue(strategy = GenerationType.AUTO)//???????????
     @Column(nullable = false,updatable = false)
-    private long id;
+    private Long id;
+    private String userId;
     private String name;
     private String surname;
     private String username;
     private String email;
-
-
-
     private String profileImageUrl;
     private Date lastLoginDate;
     private Date lastLoginDateDisplay;
     private Date joinDate;
     private String password;
-    private String[] roles; //User,Admin
+    private String role; //User,Admin
     private String[] authorities;
     private boolean isActive;
     private boolean isNotLocked;
@@ -40,8 +38,9 @@ public class User implements Serializable {//because we transfer this datas to d
 
 
 
-    public User(long id, String name, String surname, String username, String email, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String password, String[] roles, String[] authorities, boolean isActive, boolean isNotLocked) {
+    public User(Long id,String userId, String name, String surname, String username, String email, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String password, String[] roles, String[] authorities, boolean isActive, boolean isNotLocked) {
         this.id = id;
+        this.userId= userId;
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -51,7 +50,7 @@ public class User implements Serializable {//because we transfer this datas to d
         this.lastLoginDateDisplay = lastLoginDateDisplay;
         this.joinDate = joinDate;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
         this.authorities = authorities;
         this.isActive = isActive;
         this.isNotLocked = isNotLocked;
@@ -60,7 +59,7 @@ public class User implements Serializable {//because we transfer this datas to d
     public User() {
     }//the default constructer so that we can create a null objectd
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -68,7 +67,13 @@ public class User implements Serializable {//because we transfer this datas to d
         this.id = id;
     }
 
+    public String getUserId() {
+        return userId;
+    }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
     public String getName() {
         return name;
     }
@@ -141,12 +146,12 @@ public class User implements Serializable {//because we transfer this datas to d
     }
 
 
-    public String[] getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String[] roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
 
